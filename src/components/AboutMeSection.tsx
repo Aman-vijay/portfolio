@@ -32,15 +32,15 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
         >
           <h2 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>About Me</h2>
           <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Full Stack Developer (1 year experience) specializing in scalable web application development using the MERN stack, Docker, and cloud platforms (AWS, GCP). Proven ability to enhance system performance by 30-40% via microservices, CI/CD, and Agile. Eager to contribute to challenging projects.
+            Full Stack Developer  specializing in scalable web application development using the MERN stack, Docker, and cloud platforms (AWS, GCP). Proven ability to enhance system performance by 30-40% via microservices, CI/CD, and Agile. Eager to contribute to challenging projects.
           </p>
           <div className="flex space-x-8">
             <div>
-              <h3 className={`text-2xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>5+</h3>
+              <h3 className={`text-2xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>1+</h3>
               <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Years of Experience</p>
             </div>
             <div>
-              <h3 className={`text-2xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>20+</h3>
+              <h3 className={`text-2xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>10+</h3>
               <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Projects Completed</p>
             </div>
           </div>
