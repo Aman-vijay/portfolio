@@ -5,14 +5,21 @@ import AboutMeSection from './components/AboutMeSection';
 import SkillsSection from './components/SkillsSection';
 import { Timeline } from './components/Timeline';
 import ProjectsSection from './components/ProjectsSection';
-import ContactSection from './components/ContactSection';
+// import ContactSection from './components/ContactSection';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import clickSound from './assets/click-sound.mp3'; // Import the sound file
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true); // Set default to true
+  const audio = new Audio(clickSound); // Create an Audio object
 
   useEffect(() => {
+    // Set dark mode class on initial load
+    document.documentElement.classList.add('dark');
+    
     return scrollY.onChange((latest) => {
       setIsScrolled(latest > 50);
     });
@@ -20,7 +27,8 @@ function App() {
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark', !darkMode);
+    document.documentElement.classList.toggle('dark');
+    audio.play(); // Play the click sound
   };
 
   const experiences = [
@@ -40,9 +48,9 @@ function App() {
     },
     {
       title: 'Bachelor of Technology in Computer Science',
-      company: 'Tech University',
-      period: 'Aug 2018 – May 2022',
-      description: 'Graduated with honors, focusing on software engineering and cloud computing.',
+      company: 'JK LAKSHMIPAT UNIVERSITY',
+      period: 'Aug 2020 – July 2024',
+      description: 'Graduated with B.Tech in Computer Science, focusing on software engineering and cloud computing.',
       type: 'education' as const,
     },
   ];
@@ -59,7 +67,11 @@ function App() {
       {/* Header */}
       <motion.header
         className={`fixed w-full z-50 transition-all duration-300 ${
-          isScrolled ? (darkMode ? 'bg-gray-800' : 'bg-white') : 'bg-transparent'
+          isScrolled 
+            ? darkMode 
+              ? 'bg-gray-900/90 backdrop-blur-sm' 
+              : 'bg-white/90 backdrop-blur-sm'
+            : 'bg-transparent'
         } ${isScrolled ? 'shadow-md py-4' : 'py-6'}`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -67,7 +79,13 @@ function App() {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           <motion.h1 
-            className={`text-xl font-bold ${isScrolled ? (darkMode ? 'text-white' : 'text-gray-800') : 'text-white'}`}
+            className={`text-xl font-bold ${
+              isScrolled 
+                ? darkMode 
+                  ? 'text-white' 
+                  : 'text-gray-800' 
+                : 'text-white'
+            }`}
             whileHover={{ scale: 1.05 }}
           >
             Aman Vijay
@@ -88,7 +106,11 @@ function App() {
                   <button
                     onClick={() => scrollToSection(item.id)}
                     className={`font-medium transition-colors ${
-                      isScrolled ? (darkMode ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600') : 'text-white hover:text-blue-200'
+                      isScrolled 
+                        ? darkMode 
+                          ? 'text-white hover:text-blue-400' 
+                          : 'text-gray-800 hover:text-blue-600'
+                        : 'text-white hover:text-blue-200'
                     }`}
                   >
                     {item.name}
@@ -99,7 +121,11 @@ function App() {
           </nav>
           <button
             onClick={toggleTheme}
-            className="ml-4 p-2 bg-gray-200 rounded-full dark:bg-gray-700 transition-colors"
+            className={`ml-4 p-2 rounded-full transition-colors ${
+              darkMode 
+                ? 'bg-gray-800 hover:bg-gray-700 text-white' 
+                : 'bg-white/10 hover:bg-white/20 text-white'
+            }`}
           >
             {darkMode ? '🌞' : '🌜'}
           </button>
@@ -110,10 +136,14 @@ function App() {
       <HeroSection darkMode={darkMode} />
       <AboutMeSection darkMode={darkMode} />
       <SkillsSection darkMode={darkMode} />
-      <section className="py-20">
+      <section className={`py-20 ${
+        darkMode 
+          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
+          : 'bg-gradient-to-br from-white via-gray-50 to-white'
+      }`}>
         <div className="container mx-auto px-6">
           <motion.h2 
-            className="text-3xl font-bold text-center mb-12"
+            className={`text-3xl font-bold text-center mb-12 ${darkMode ? 'text-white' : 'text-gray-900'}`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -125,7 +155,10 @@ function App() {
         </div>
       </section>
       <ProjectsSection darkMode={darkMode} />
-      <ContactSection darkMode={darkMode} />
+      {/* <ContactSection darkMode={darkMode} />
+       */}
+      <Contact darkMode={darkMode} />
+      <Footer darkMode={darkMode} />
     </div>
   );
 }

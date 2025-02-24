@@ -160,7 +160,7 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
                 }}
               />
              <img 
-                src="../public/aman.jpg" 
+                  src="./Aman.jpg"  
                 alt="Profile" 
                 className="relative w-72 h-72 object-cover rounded-full border-4 border-white/50 shadow-2xl"
               />

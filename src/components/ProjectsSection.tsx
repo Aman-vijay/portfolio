@@ -119,7 +119,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
                     </span>
                   ))}
                   {project.techUsed.split(', ').length > 3 && (
-                    <span className="px-3 py-1 text-sm rounded-full text-white bg-blue-600">
+                    <span className="px-3 py-1 text-sm rounded-full text-white bg-gradient-to-r from-cyan-500 to-blue-600">
                       +{project.techUsed.split(', ').length - 3} more
                     </span>
                   )}
@@ -174,7 +174,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
                     whileTap={{ scale: 0.95 }}
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
                       ${darkMode 
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white' 
                         : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
                   >
                     View Details

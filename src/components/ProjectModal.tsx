@@ -9,7 +9,7 @@ interface ProjectModalProps {
   darkMode: boolean;
 }
 
-export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+export default function ProjectModal({ project, isOpen, onClose, darkMode }: ProjectModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -25,11 +25,11 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className={`bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative`}
+            className={`rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
           >
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              className={`absolute top-4 right-4 p-2 rounded-full transition-colors ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'}`}
             >
               <X className="w-5 h-5" />
             </button>
@@ -43,10 +43,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             </div>
 
             <div className="p-6">
-              <h3 className={`text-2xl font-bold mb-2`}>
+              <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 {project?.title}
               </h3>
-              <p className={`text-gray-600 mb-4`}>
+              <p className={`text-gray-600 mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 {project?.details}
               </p>
 
@@ -54,7 +54,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 {project?.techUsed.split(', ').map((tech, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm"
+                    className={`px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm ${darkMode ? 'bg-indigo-600 text-white' : 'bg-indigo-100 text-indigo-800'}`}
                   >
                     {tech}
                   </span>
@@ -65,30 +65,28 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 <div className="space-y-6">
                   {project.problem && (
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2">Problem</h4>
-                      <p className="text-gray-600">{project.problem}</p>
+                      <h4 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-2`}>Problem</h4>
+                      <p className={`text-gray-600 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{project.problem}</p>
                     </div>
                   )}
 
                   {project.solution && (
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2">Solution</h4>
-                      <p className="text-gray-600">{project.solution}</p>
+                      <h4 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-2`}>Solution</h4>
+                      <p className={`text-gray-600 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{project.solution}</p>
                     </div>
                   )}
 
                   {project.features && (
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2">Key Features</h4>
+                      <h4 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-2`}>Key Features</h4>
                       <ul className="list-disc list-inside space-y-1 text-gray-600">
                         {project.features.map((feature, index) => (
-                          <li key={index}>{feature}</li>
+                          <li key={index} className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{feature}</li>
                         ))}
                       </ul>
                     </div>
                   )}
-
-              
                 </div>
               )}
 
@@ -97,7 +95,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   href={project?.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${darkMode ? 'bg-gray-700 text-white hover:bg-gray-600' : 'bg-gray-900 text-white hover:bg-gray-800'}`}
                 >
                   <Github className="w-5 h-5" />
                   View Code
@@ -106,7 +104,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   href={project?.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${darkMode ? 'bg-indigo-600 text-white hover:bg-indigo-500' : 'bg-indigo-600 text-white hover:bg-indigo-500'}`}
                 >
                   <ExternalLink className="w-5 h-5" />
                   Live Demo
