@@ -1,24 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap } from 'lucide-react';
+import { timeline } from '../data/timeline';
 
-// Define the shape of an experience object
-interface Experience {
-  title: string;
-  company: string;
-  period: string;
-  description: string;
-  type: 'work' | 'education';
-}
+
 
 // Define the props for the Timeline component if needed
 
 interface TimelineProps {
-  experiences: Experience[];
   darkMode: boolean;
 }
 
-export const Timeline: React.FC<TimelineProps> = ({ experiences, darkMode }: TimelineProps) => {
+
+
+export const Timeline: React.FC<TimelineProps> = ({  darkMode }: TimelineProps) => {
   return (
     <div className="relative max-w-4xl mx-auto py-12">
       {/* Vertical Line */}
@@ -26,7 +21,7 @@ export const Timeline: React.FC<TimelineProps> = ({ experiences, darkMode }: Tim
 
       {/* Timeline Items */}
       <div className="space-y-16">
-        {experiences.map((exp, index) => (
+        {timeline.map((exp, index) => (
           <motion.div 
             key={index} 
             className={`flex items-center justify-between relative ${
@@ -62,7 +57,7 @@ export const Timeline: React.FC<TimelineProps> = ({ experiences, darkMode }: Tim
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.2 }}
               >
-                {exp.type === 'work' ? <Briefcase size={20} color={darkMode ? 'white' : 'white'} /> : <GraduationCap size={20} color={darkMode ? 'white' : 'white'} />}
+                {exp.type === 'work' ? <Briefcase size={20} color={darkMode ? 'white' : 'black'} /> : <GraduationCap size={20} color={darkMode ? 'white' : 'black'} />}
               </motion.div>
             </div>
           </motion.div>

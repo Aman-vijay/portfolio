@@ -7,7 +7,9 @@ interface AboutMeSectionProps {
 
 const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
   return (
-    <section className={`py-20 ${
+    <section
+     id="about"
+     className={`py-20 ${
       darkMode 
         ? 'bg-gradient-to-br from-gray-800 via-gray-900 to-black' 
         : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'

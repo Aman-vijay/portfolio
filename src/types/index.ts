@@ -15,6 +15,7 @@ export interface ProjectItem {
     company: string;
     period: string;
     description: string;
+    type: 'work' | 'education';
   }
   
 

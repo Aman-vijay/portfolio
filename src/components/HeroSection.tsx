@@ -21,7 +21,7 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
 
   return (
     <section 
-      id="about" 
+      id="hero" 
       className={`relative min-h-screen flex items-center justify-center overflow-hidden
         ${darkMode 
           ? 'bg-gradient-to-br from-gray-900 via-slate-900 to-black' 
@@ -65,7 +65,7 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
               transition={{ delay: 0.2 }}
               className="space-y-4"
             >
-              <span className={`text-2xl font-light block
+              <span className={`text-2xl font-light block mt-20
                 ${darkMode ? 'text-blue-400' : 'text-blue-300'}`}>
                 👋 Hi there, I'm
               </span>
