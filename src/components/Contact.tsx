@@ -4,6 +4,7 @@ import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { fadeInUp, staggerContainer } from "../utils/animations";
+import { CONTACT_INFO } from '../utils/urls';
 
 interface ContactProps {
   darkMode: boolean;
@@ -73,7 +74,7 @@ export default function Contact({ darkMode }: ContactProps) {
                 </div>
                 <div>
                   <p className="text-sm text-gray-400">Email</p>
-                  <p className="font-medium">shivamvj04@gmail.com</p>
+                  <p className="font-medium">{CONTACT_INFO.EMAIL}</p>
                 </div>
               </motion.div>
 
@@ -86,7 +87,7 @@ export default function Contact({ darkMode }: ContactProps) {
                 </div>
                 <div>
                   <p className="text-sm text-gray-400">Location</p>
-                  <p className="font-medium">India</p>
+                  <p className="font-medium">{CONTACT_INFO.LOCATION}</p>
                 </div>
               </motion.div>
             </div>

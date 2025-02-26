@@ -1,4 +1,5 @@
 import { ProjectItem } from '../types';
+import { PROJECT_URLS } from '../utils/urls';
 
 export const projects: ProjectItem[] = [
   {
@@ -15,8 +16,8 @@ export const projects: ProjectItem[] = [
       "Auto-scaling configuration on AWS EC2",
       "Centralized logging and monitoring"
     ],
-    github: "https://github.com/yourusername/foodflow",
-    live: "https://foodflow-demo.com"
+    github: PROJECT_URLS.FOODFLOW.GITHUB,
+    live: PROJECT_URLS.FOODFLOW.LIVE
   },
   {
     title: "TOURISM IN RAJASTHAN",
@@ -32,7 +33,37 @@ export const projects: ProjectItem[] = [
       "Offline data caching",
       "Multi-language support"
     ],
-    github: "https://github.com/yourusername/rajasthan-tourism",
-    live: "https://rajasthan-tourism-demo.com"
+    github: PROJECT_URLS.RAJASTHAN_TOURISM.GITHUB,
+    live: PROJECT_URLS.RAJASTHAN_TOURISM.LIVE
+  },
+
+  {
+  title:"Memories",
+  details:" A full stack MERN application where users can add, edit, delete and view memories. It is a platform where users can share their memories with each other.",
+  image:"https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80 ",
+  techUsed:"MongoDB, Express, React, Node.js",
+  problem:"Managing token based authentication",
+  solution:"Using JWT tokens for authentication",
+  features:[
+    "User authentication with JWT tokens",
+    "CRUD operations for memories",
+    "Responsive design for mobile devices",
+    "Offline data caching",
+    "Multi-language support"
+  ],
+  github:PROJECT_URLS.MEMORIES.GITHUB,
+  live:PROJECT_URLS.MEMORIES.LIVE
+  },
+
+  {
+    title:"",
+    details:"",
+    image:"",
+    techUsed:"",
+    problem:"",
+    solution:"",
+    features:[],
+    github:"",
+    live:""
   }
 ]; 
