@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { DownloadIcon } from 'lucide-react';
+import { RESUME_URL } from '../utils/urls';
 
 interface AboutMeSectionProps {
   darkMode: boolean;
@@ -58,7 +60,7 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
           <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             Full Stack Developer specializing in scalable web application development using the MERN stack, Docker, and cloud platforms (AWS, GCP). Proven ability to enhance system performance by 30-40% via microservices, CI/CD, and Agile. Eager to contribute to challenging projects.
           </p>
-          <div className="flex space-x-8">
+          <div className="flex flex-wrap gap-8">
             <div>
               <h3 className={`text-2xl font-bold ${darkMode ? 'text-cyan-400' : 'text-blue-600'}`}>1+</h3>
               <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Years of Experience</p>
@@ -68,6 +70,22 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
               <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Projects Completed</p>
             </div>
           </div>
+          
+          {/* Resume button - moved outside the stats div */}
+          <motion.a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-full mt-6 font-medium transition-colors
+              ${darkMode 
+                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white' 
+                : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white'}`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <DownloadIcon size={20} />
+            <span>Resume</span>
+          </motion.a>
         </motion.div>
       </div>
     </section>
