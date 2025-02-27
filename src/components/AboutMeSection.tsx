@@ -98,9 +98,9 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
               </style>
             </div>
             <img
-              src="./Aman.webp"
+              src="./Aman.png"
               alt="About Me"
-              className="relative w-72 h-72 object-cover shadow-2xl border-2 border-cyan-400/50"
+              className="relative w-80 h-96 object-cover   "
             />
           </div>
         </motion.div>
