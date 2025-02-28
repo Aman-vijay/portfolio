@@ -132,11 +132,11 @@ const Header = ({ darkMode, toggleTheme }: HeaderProps) => {
       </motion.header>
 
       {/* Mobile Floating Navigation Pill */}
-      <div className="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50">
+      <div className="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[95%]">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className={`flex items-center gap-1 p-1.5 rounded-full shadow-lg backdrop-blur-sm
+          className={`flex items-center gap-1 p-1.5 rounded-full shadow-lg backdrop-blur-sm overflow-hidden
             ${darkMode 
               ? 'bg-gray-800/90 text-gray-400' 
               : 'bg-white/90 text-gray-500'}`}
