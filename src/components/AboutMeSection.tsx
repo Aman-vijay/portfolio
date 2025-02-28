@@ -40,21 +40,45 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
         }}
       />
 
-      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-12 relative z-10">
         {/* Image Area */}
         <motion.div
-          className="md:w-1/2 flex justify-center"
+          className="w-full md:w-1/2 flex justify-center items-center relative -mt-8 md:-mt-20"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="relative">
-            {/* Hexagonal Frame */}
-            <svg
-              className="absolute -inset-2 text-cyan-400 opacity-50"
-              width="300"
-              height="300"
+          {/* Background Glow Effect */}
+          <div className="absolute w-80 h-80 md:w-[420px] md:h-[420px] bg-cyan-400/20 rounded-full blur-3xl" />
+          
+          <div className="relative group">
+            {/* Animated Hexagonal Frame */}
+            <motion.svg
+              className="absolute -inset-2 text-cyan-400/50"
+              width="320"
+              height="320"
               viewBox="0 0 100 100"
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            >
+              <polygon
+                points="50,10 90,30 90,70 50,90 10,70 10,30"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+              />
+            </motion.svg>
+            
+            {/* Static Hexagonal Frame */}
+            <svg
+              className="absolute -inset-2 text-cyan-400/30"
+              width="320"
+              height="320"
+              viewBox="0 0 100 100"
+              
+              
+             
             >
               <polygon
                 points="50,10 90,30 90,70 50,90 10,70 10,30"
@@ -63,17 +87,30 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
                 strokeWidth="1"
               />
             </svg>
-            <img
-              src="./Av.png"
-              alt="About Me"
-              className="relative w-80 h-96 object-cover"
-            />
+
+            {/* Avatar Image */}
+            <motion.div
+              className="relative w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden"
+            >
+              <img
+                src="./avatar.png"
+                alt="Aman Vijay Futuristic Avatar"
+                className="w-full h-full object-cover shadow-lg"
+                style={{
+                  filter: 'blur(10px)',
+                  transition: 'filter 0.5s ease-out'
+                }}
+                onLoad={(e) => {
+                  e.currentTarget.style.filter = 'blur(0)';
+                }}
+              />
+            </motion.div>
           </div>
         </motion.div>
 
         {/* Description Area */}
         <motion.div
-          className="md:w-1/2 space-y-6"
+          className="w-full md:w-1/2 space-y-6"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -83,7 +120,7 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
               darkMode ? 'text-white' : 'text-gray-200'
             }`}
           >
-           <span className="text-cyan-400 mr-1">/</span>
+            <span className="text-cyan-400 mr-1">/</span>
             {/* Animated "About Me" characters */}
             {titleText.map((char, index) => (
               <motion.span
