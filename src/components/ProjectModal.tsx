@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Github, ExternalLink } from 'lucide-react';
 import { ProjectItem } from '../types';
@@ -10,38 +10,10 @@ interface ProjectModalProps {
   darkMode: boolean;
 }
 
-const matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン{}[]<>:;/%$#@!*()-+';
-
 export default function ProjectModal({ project, isOpen, onClose, darkMode }: ProjectModalProps) {
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
-
-  // Glitch Text Component (Subtle, only for title)
+  // Simplified GlitchText Component
   const GlitchText = ({ text }: { text: string }) => {
-    const [displayText, setDisplayText] = React.useState(text);
-
-    React.useEffect(() => {
-      if (!text || !isOpen) return;
-
-      let iterations = 0;
-      const maxIterations = 8;
-      const interval = setInterval(() => {
-        setDisplayText(
-          text
-            .split('')
-            .map((char, idx) => (idx < iterations / 2 ? char : matrixChars[Math.floor(Math.random() * matrixChars.length)]))
-            .join('')
-        );
-        iterations += 1;
-        if (iterations > maxIterations) {
-          clearInterval(interval);
-          setDisplayText(text);
-        }
-      }, 50);
-
-      return () => clearInterval(interval);
-    }, [text, isOpen]);
-
-    return <span className="glitch-text font-mono text-white">{displayText}</span>;
+    return <span className="font-mono text-white">{text}</span>;
   };
 
   return (
@@ -55,13 +27,13 @@ export default function ProjectModal({ project, isOpen, onClose, darkMode }: Pro
           className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
         >
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
+            exit={{ scale: 0.9, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
             className={`rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative border border-cyan-400/30 bg-black/70 shadow-lg`}
           >
-            {/* Close Button - Updated styling */}
+            {/* Close Button */}
             <motion.button
               onClick={onClose}
               whileHover={{ scale: 1.1 }}
@@ -94,15 +66,8 @@ export default function ProjectModal({ project, isOpen, onClose, darkMode }: Pro
                   {project?.techUsed.split(', ').map((tech, index) => (
                     <motion.span
                       key={index}
-                      className="px-3 py-1 bg-cyan-400/20 text-cyan-400 rounded-full text-sm font-mono glitch-tag"
-                      animate={
-                        hoveredTech === tech
-                          ? { scale: [1, 1.05, 1], textShadow: '0 0 10px rgba(0, 243, 255, 1)' }
-                          : { scale: 1, textShadow: '0 0 5px rgba(0, 243, 255, 0.5)' }
-                      }
-                      transition={{ duration: 0.5, repeat: hoveredTech === tech ? Infinity : 0 }}
-                      onMouseEnter={() => setHoveredTech(tech)}
-                      onMouseLeave={() => setHoveredTech(null)}
+                      className="px-3 py-1 bg-cyan-400/20 text-cyan-400 rounded-full text-sm font-mono"
+                      whileHover={{ scale: 1.05 }}
                     >
                       {tech}
                     </motion.span>
@@ -187,46 +152,4 @@ export default function ProjectModal({ project, isOpen, onClose, darkMode }: Pro
       )}
     </AnimatePresence>
   );
-}
-
-// Global Styles (Add this in a CSS file or within the component)
-const styles = `
-  @keyframes scan {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-  }
-  @keyframes glitch-flash {
-    0%, 100% { color: #00f3ff; text-shadow: 0 0 5px rgba(0, 243, 255, 0.8); }
-    50% { color: #00c3ff; text-shadow: 0 0 10px rgba(0, 195, 255, 1); }
-  }
-  @keyframes tag-pulse {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
-  }
-  .scanline {
-    background: linear-gradient(to bottom, rgba(0, 255, 255, 0.1) 0%, transparent 10%, transparent 90%, rgba(0, 255, 255, 0.1) 100%);
-    animation: scan 3s infinite linear;
-    pointer-events: none;
-  }
-  .glitch-text {
-    text-shadow: 0 0 5px rgba(0, 243, 255, 0.8);
-    animation: glitch-flash 4s infinite;
-  }
-  .glitch-tag {
-    animation: tag-pulse 2s infinite;
-    text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
-  }
-  @media (max-width: 768px) {
-    .scanline { animation-duration: 5s; }
-    .glitch-text { animation-duration: 6s; }
-  }
-  @supports not (backdrop-filter: blur(4px)) {
-    .glitch-text { animation: glitch-flash 4s infinite; }
-  }
-`;
-
-if (typeof document !== 'undefined') {
-  const styleSheet = document.createElement('style');
-  styleSheet.textContent = styles;
-  document.head.appendChild(styleSheet);
 }

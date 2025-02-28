@@ -21,8 +21,8 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
+      {/* Simplified Background */}
       <div
         className={`absolute inset-0 ${
           darkMode
@@ -30,47 +30,13 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
             : 'bg-gradient-to-br from-blue-900 via-indigo-800 to-gray-900'
         }`}
       >
-        {/* Circuit Board Pattern */}
+        {/* Static Circuit Board Pattern */}
         <div
           className="absolute inset-0 opacity-10 bg-repeat"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%239C92AC' stroke-width='1' stroke-opacity='0.4'%3E%3Cpath d='M10 10h40M10 30h20M40 30h10M10 50h40M30 10v40M10 30h20M40 30h10'/%3E%3Ccircle cx='10' cy='10' r='1' fill='%239C92AC'/%3E%3Ccircle cx='50' cy='10' r='1' fill='%239C92AC'/%3E%3Ccircle cx='30' cy='30' r='1' fill='%239C92AC'/%3E%3Ccircle cx='50' cy='50' r='1' fill='%239C92AC'/%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
-
-        {/* Matrix-Style Digital Rain */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <style>
-            {`
-              @keyframes fall {
-                0% { transform: translateY(-100vh); opacity: 0; }
-                20% { opacity: 0.7; }
-                100% { transform: translateY(100vh); opacity: 0.3; }
-              }
-              .digital-rain {
-                position: absolute;
-                top: -10%;
-                color: ${darkMode ? '#00FFFF' : '#00CED1'};
-                font-family: monospace;
-                font-size: 16px;
-                animation: fall linear infinite;
-              }
-            `}
-          </style>
-          {[...Array(20)].map((_, i) => (
-            <span
-              key={i}
-              className="digital-rain"
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDuration: `${Math.random() * 5 + 5}s`,
-                animationDelay: `${Math.random() * 5}s`,
-              }}
-            >
-              {Math.random() > 0.5 ? '1' : '0'}
-            </span>
-          ))}
-        </div>
       </div>
 
       {/* Main Content */}
@@ -82,7 +48,7 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            Hey, I’m <span className={`${darkMode ? 'text-cyan-400' : 'text-cyan-300'}`}>Aman Vijay</span>
+            Hey, I'm <span className={`${darkMode ? 'text-cyan-400' : 'text-cyan-300'}`}>Aman Vijay</span>
           </motion.h1>
 
           <motion.div
@@ -91,17 +57,21 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
+           
             <AnimatePresence mode="wait">
-              <motion.div
-                key={roleIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="flex items-center justify-center"
-              >
-                <span className="mr-2 text-cyan-400">{'>'}</span> {roles[roleIndex]}
-              </motion.div>
+              <div className="relative flex items-center justify-center">
+                <span className="absolute left-4 md:left-32 text-cyan-400">{'>_'}</span>
+                <motion.div
+                  key={roleIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="pl-6"
+                >
+                  {roles[roleIndex]}
+                </motion.div>
+              </div>
             </AnimatePresence>
           </motion.div>
 

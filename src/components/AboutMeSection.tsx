@@ -8,54 +8,37 @@ interface AboutMeSectionProps {
 }
 
 const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
+  const textVariants = {
+    hidden: { opacity: 0, x: 100 }, // Start off-screen to the right
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: i * 0.1, // Stagger each character
+        duration: 0.3,
+        ease: 'easeOut',
+      },
+    }),
+  };
+
+  // Split "About Me" into individual characters, excluding the "/"
+  const titleText = "About_Me".split('');
   return (
     <section
       id="about"
       className={`py-20 relative ${
         darkMode
           ? 'bg-gradient-to-br from-gray-900 via-black to-gray-800'
-          : 'bg-gradient-to-br from-gray-800 via-indigo-900 to-gray-900'
+          : 'bg-gradient-to-br from-gray-800 via-indigo-800 to-gray-900'
       }`}
     >
-      {/* Circuit Background */}
+      {/* Simplified Background */}
       <div
         className="absolute inset-0 opacity-10 bg-repeat"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%239C92AC' stroke-width='1' stroke-opacity='0.4'%3E%3Cpath d='M10 10h40M10 30h20M40 30h10M10 50h40M30 10v40M10 30h20M40 30h10'/%3E%3Ccircle cx='10' cy='10' r='1' fill='%239C92AC'/%3E%3Ccircle cx='50' cy='10' r='1' fill='%239C92AC'/%3E%3Ccircle cx='30' cy='30' r='1' fill='%239C92AC'/%3E%3Ccircle cx='50' cy='50' r='1' fill='%239C92AC'/%3E%3C/g%3E%3C/svg%3E")`,
         }}
       />
-
-      {/* Faint Code Overlay */}
-      <div className="absolute inset-0 opacity-15 pointer-events-none">
-        <style>
-          {`
-            @keyframes drift {
-              0% { transform: translateY(0); opacity: 0.5; }
-              100% { transform: translateY(20px); opacity: 0; }
-            }
-            .code-overlay {
-              position: absolute;
-              color: ${darkMode ? '#00FFFF' : '#00CED1'};
-              font-family: monospace;
-              font-size: 14px;
-              animation: drift 6s infinite linear;
-            }
-          `}
-        </style>
-        {['{', '}', '1', '0', ';', '=>'].map((char, i) => (
-          <span
-            key={i}
-            className="code-overlay"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-            }}
-          >
-            {char}
-          </span>
-        ))}
-      </div>
 
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
         {/* Image Area */}
@@ -80,27 +63,10 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
                 strokeWidth="1"
               />
             </svg>
-            {/* Scanline Effect */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(to bottom, rgba(0, 255, 255, 0.1) 0%, transparent 10%, transparent 90%, rgba(0, 255, 255, 0.1) 100%)`,
-                animation: 'scan 3s infinite linear',
-              }}
-            >
-              <style>
-                {`
-                  @keyframes scan {
-                    0% { transform: translateY(-100%); }
-                    100% { transform: translateY(100%); }
-                  }
-                `}
-              </style>
-            </div>
             <img
-              src="./Aman.png"
+              src="./Av.png"
               alt="About Me"
-              className="relative w-80 h-96 object-cover   "
+              className="relative w-80 h-96 object-cover"
             />
           </div>
         </motion.div>
@@ -117,7 +83,25 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
               darkMode ? 'text-white' : 'text-gray-200'
             }`}
           >
-            <span className="text-cyan-400">/</span> About Me
+           <span className="text-cyan-400 mr-1">/</span>
+            {/* Animated "About Me" characters */}
+            {titleText.map((char, index) => (
+              <motion.span
+                key={index}
+                custom={index}
+                initial="hidden"
+                animate="visible"
+                variants={textVariants}
+                className="inline-block"
+                style={{
+                  textShadow: darkMode
+                    ? '0 0 5px rgba(0, 243, 255, 0.5)'
+                    : '0 0 3px rgba(0, 243, 255, 0.3)',
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
           </h2>
           <p
             className={`text-lg font-mono ${
