@@ -25,6 +25,10 @@ export const PROJECT_URLS = {
     GITHUB: "https://github.com/aman-vijay/memories",
     LIVE: "https://memories-demo.com",
   },
+  PASSWORD_MANAGER: {
+    GITHUB: "https://github.com/Aman-vijay/Crypto-",
+    
+  },
 };
 
 // Resume URL

@@ -17,12 +17,12 @@ export const projects: ProjectItem[] = [
       "Centralized logging and monitoring"
     ],
     github: PROJECT_URLS.FOODFLOW.GITHUB,
-    live: PROJECT_URLS.FOODFLOW.LIVE
+    live: PROJECT_URLS.FOODFLOW.LIVE ?? ""
   },
   {
     title: "TOURISM IN RAJASTHAN",
     details: "Developed an online platform with HTML, CSS, and JavaScript for tourists visiting Rajasthan to locate popular tourist spots. Created a database in SQLite to reduce loading static file reducing 10% compile time provided by Django to store the locations along with the maps and general information.",
-    image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    image: "./tourism_in_raj.webp",
     techUsed: "HTML, CSS, JavaScript, SQLite, Django",
     problem: "Difficulty in locating and accessing tourist information efficiently.",
     solution: "Created an interactive platform with optimized data storage and retrieval.",
@@ -40,7 +40,7 @@ export const projects: ProjectItem[] = [
   {
   title:"Memories",
   details:" A full stack MERN application where users can add, edit, delete and view memories. It is a platform where users can share their memories with each other.",
-  image:"https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80 ",
+  image:"./memories.webp",
   techUsed:"MongoDB, Express, React, Node.js",
   problem:"Managing token based authentication",
   solution:"Using JWT tokens for authentication",
@@ -56,14 +56,20 @@ export const projects: ProjectItem[] = [
   },
 
   {
-    title:"",
-    details:"",
-    image:"",
-    techUsed:"",
-    problem:"",
-    solution:"",
-    features:[],
-    github:"",
-    live:""
+    title:"password Manager",
+    details:"A python based password manager with a GUI interface. It allows users to store, retrieve and manage their passwords securely.",
+    image:"./password manager.png",
+    techUsed:"Python, Tkinter, SQLite",
+    problem:"Managing passwords securely",
+    solution:"Using SQLite to store passwords",
+    features:[
+      "A secure password manager with a GUI interface",
+      "AES based encryption",
+      "Password generation",
+      "Clipboard integration",
+      "Secure password storage"
+    ],
+    github:PROJECT_URLS.PASSWORD_MANAGER.GITHUB,
+   
   }
 ]; 
