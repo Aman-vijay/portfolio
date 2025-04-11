@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
 import { SOCIAL_URLS } from '../utils/urls';
+import { useEffect,useState } from 'react';
 
 const roles = [
   "Full Stack Developer",
@@ -10,19 +11,58 @@ const roles = [
   "Software Engineer",
 ];
 
-const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
-  const [roleIndex, setRoleIndex] = React.useState(0);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
+
+const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
+  const text = "Aman Vijay";
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [charIndex, setCharIndex] = useState(0);
+  
+  useEffect(() => {
+    const typingSpeed = isDeleting ? 100 : 150;
+    const pauseBeforeDelete = 2000;
+   
+  
+    let typingTimeout: ReturnType<typeof setTimeout>;
+
+  
+    if (!isDeleting && charIndex < text.length) {
+      typingTimeout = setTimeout(() => {
+        setDisplayText(text.slice(0, charIndex + 1));
+        setCharIndex((prev) => prev + 1);
+      }, typingSpeed);
+    } else if (!isDeleting && charIndex === text.length) {
+      typingTimeout = setTimeout(() => setIsDeleting(true), pauseBeforeDelete);
+    } else if (isDeleting && charIndex > 0) {
+      typingTimeout = setTimeout(() => {
+        setDisplayText(text.slice(0, charIndex - 1));
+        setCharIndex((prev) => prev - 1);
+      }, typingSpeed);
+    } else if (isDeleting && charIndex === 0) {
+      setIsDeleting(false);
+    }
+  
+    return () =>{ clearTimeout(typingTimeout)
+      
+    };
+  }, [charIndex, isDeleting]);
+
+  useEffect(()=>{
+    const roleInterval = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % roles.length);
     }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+
+    return ()=> clearInterval(roleInterval)
+
+  },[])
+  
+  
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
-      {/* Simplified Background */}
+   
       <div
         className={`absolute inset-0 ${
           darkMode
@@ -30,7 +70,7 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
             : 'bg-gradient-to-br from-blue-900 via-indigo-800 to-gray-900'
         }`}
       >
-        {/* Static Circuit Board Pattern */}
+      
         <div
           className="absolute inset-0 opacity-10 bg-repeat"
           style={{
@@ -42,14 +82,18 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center justify-center min-h-screen">
         <div className="max-w-3xl text-center">
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-white font-mono"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Hey, I'm <span className={`${darkMode ? 'text-cyan-400' : 'text-cyan-300'}`}>Aman Vijay</span>
-          </motion.h1>
+        <motion.h1
+  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-white font-mono leading-tight"
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+>
+  <span className="block sm:inline">Hi I'm&nbsp;</span>
+  <span className="block sm:inline text-cyan-400 whitespace-nowrap">
+    {displayText}
+    <span className="animate-pulse">|</span>
+  </span>
+</motion.h1>
 
           <motion.div
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 h-16 text-white font-mono tracking-wide"
@@ -60,7 +104,7 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
            
             <AnimatePresence mode="wait">
               <div className="relative flex items-center justify-center">
-                <span className="absolute left-4 md:left-32 text-cyan-400">{'>_'}</span>
+                <span className="absolute left-4 md:left-20 text-cyan-400">{'>_'}</span>
                 <motion.div
                   key={roleIndex}
                   initial={{ opacity: 0, y: 20 }}
