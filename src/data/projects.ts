@@ -2,6 +2,24 @@ import { ProjectItem } from '../types';
 import { PROJECT_URLS } from '../utils/urls';
 
 export const projects: ProjectItem[] = [
+
+   {
+    title: "URL Shortener",
+    details: "A production-ready full-stack URL shortener built with the MERN stack. Includes real-time analytics like location and device stats, along with QR code support.",
+    image: "./url_shor.webp",
+    techUsed: "MongoDB, Express, React, Node.js, Tailwind CSS, Vite, Recharts",
+    problem: "No centralized, analytic-rich tool for sharing branded links easily.",
+    solution: "Built a clean, responsive dashboard with dynamic redirects, device/geolocation analytics, and QR codes.",
+    features: [
+      "User authentication and dashboard",
+      "Location and device analytics",
+      "QR code generation",
+      "Link shortening and redirection",
+      "Vercel + Render deployment with CORS configuration"
+    ],
+    github: PROJECT_URLS.URL_SHORTNER.GITHUB,
+    live: PROJECT_URLS.URL_SHORTNER.LIVE
+  },
   {
     title: "FOODFLOW MICROSERVICES",
     details: "Architected 5+ containerized microservices using Docker, improving deployment efficiency by 50%. Configured NGINX reverse proxy to manage 100 concurrent requests, achieving 99.9% uptime on AWS EC2.",
@@ -17,7 +35,7 @@ export const projects: ProjectItem[] = [
       "Centralized logging and monitoring"
     ],
     github: PROJECT_URLS.FOODFLOW.GITHUB,
-    live: PROJECT_URLS.FOODFLOW.LIVE ?? ""
+
   },
   {
     title: "TOURISM IN RAJASTHAN",
@@ -34,42 +52,25 @@ export const projects: ProjectItem[] = [
       "Multi-language support"
     ],
     github: PROJECT_URLS.RAJASTHAN_TOURISM.GITHUB,
-    live: PROJECT_URLS.RAJASTHAN_TOURISM.LIVE
-  },
 
-  {
-  title:"Memories",
-  details:" A full stack MERN application where users can add, edit, delete and view memories. It is a platform where users can share their memories with each other.",
-  image:"./memories.webp",
-  techUsed:"MongoDB, Express, React, Node.js",
-  problem:"Managing token based authentication",
-  solution:"Using JWT tokens for authentication",
-  features:[
-    "User authentication with JWT tokens",
-    "CRUD operations for memories",
-    "Responsive design for mobile devices",
-    "Offline data caching",
-    "Multi-language support"
-  ],
-  github:PROJECT_URLS.MEMORIES.GITHUB,
-  live:PROJECT_URLS.MEMORIES.LIVE
   },
-
   {
-    title:"password Manager",
-    details:"A python based password manager with a GUI interface. It allows users to store, retrieve and manage their passwords securely.",
-    image:"./password manager.png",
-    techUsed:"Python, Tkinter, SQLite",
-    problem:"Managing passwords securely",
-    solution:"Using SQLite to store passwords",
-    features:[
-      "A secure password manager with a GUI interface",
-      "AES based encryption",
-      "Password generation",
-      "Clipboard integration",
-      "Secure password storage"
+    title: "Memories",
+    details: " A full stack MERN application where users can add, edit, delete and view memories. It is a platform where users can share their memories with each other.",
+    image: "./memories.webp",
+    techUsed: "MongoDB, Express, React, Node.js",
+    problem: "Managing token based authentication",
+    solution: "Using JWT tokens for authentication",
+    features: [
+      "User authentication with JWT tokens",
+      "CRUD operations for memories",
+      "Responsive design for mobile devices",
+      "Offline data caching",
+      "Multi-language support"
     ],
-    github:PROJECT_URLS.PASSWORD_MANAGER.GITHUB,
-   
-  }
-]; 
+    github: PROJECT_URLS.MEMORIES.GITHUB,
+    
+  },
+
+ 
+];

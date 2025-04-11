@@ -25,10 +25,11 @@ export const PROJECT_URLS = {
     GITHUB: "https://github.com/aman-vijay/memories",
     LIVE: "https://memories-demo.com",
   },
-  PASSWORD_MANAGER: {
-    GITHUB: "https://github.com/Aman-vijay/Crypto-",
-    
-  },
+  URL_SHORTNER :{
+    GITHUB: "https://github.com/Aman-vijay/Url-Shrotner",
+    LIVE: "https://url-shrotner-ten.vercel.app/"
+  }
+  
 };
 
 // Resume URL
