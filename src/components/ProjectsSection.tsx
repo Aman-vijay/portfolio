@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import ProjectModal from './ProjectModal';
 import { projects } from '../data/projects';
 import { ProjectItem } from '../types/index';
@@ -13,6 +13,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   const openModal = (project: ProjectItem) => {
     setSelectedProject(project);
@@ -24,7 +25,13 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
     setSelectedProject(null);
   };
 
-  // Simplified GlitchText Component
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const projectsToShow = showAll ? projects : projects.slice(0, 4);
+  const hasMoreProjects = projects.length > 4;
+
   const GlitchText = ({ text }: { text: string }) => {
     return <span className="font-mono text-white">{text}</span>;
   };
@@ -58,7 +65,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+          {projectsToShow.map((project, index) => (
             <motion.div
               key={index}
               className={`group relative rounded-xl border border-cyan-400/30 bg-black/50 hover:bg-black/70 shadow-lg hover:shadow-cyan-400/20 transition-all overflow-hidden`}
@@ -156,6 +163,36 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
             </motion.div>
           ))}
         </div>
+
+        {/* View More/View Less Button */}
+        {hasMoreProjects && (
+          <motion.div
+            className="flex justify-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <motion.button
+              onClick={toggleShowAll}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 px-8 py-3 rounded-lg font-mono text-sm uppercase tracking-wide text-cyan-400 border border-cyan-400/50 bg-black/30 hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300"
+            >
+              {showAll ? (
+                <>
+                  <span>View Less</span>
+                  <ChevronUp size={20} />
+                </>
+              ) : (
+                <>
+                  <span>View More </span>
+                  <ChevronDown size={20} />
+                </>
+              )}
+            </motion.button>
+          </motion.div>
+        )}
       </div>
 
       <ProjectModal isOpen={isModalOpen} onClose={closeModal} project={selectedProject} darkMode={darkMode} />

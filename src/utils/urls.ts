@@ -28,11 +28,21 @@ export const PROJECT_URLS = {
   URL_SHORTNER :{
     GITHUB: "https://github.com/Aman-vijay/Url-Shrotner",
     LIVE: "https://url-shrotner-ten.vercel.app/"
+  },
+  BOX_DROP :{
+    GITHUB:"https://github.com/Aman-vijay/boxdrop.git",
+    LIVE:"https://boxdrop-fawn.vercel.app/"
+  },
+  VIDEO_EDITOR:{
+    GITHUB:"https://github.com/Aman-vijay/VideoEditor.git" 
+  },
+  LOAD_BALANCER:{
+    GITHUB:"https://github.com/Aman-vijay/loadbalancer"
   }
   
 };
 
 // Resume URL
-export const RESUME_URL = "https://drive.google.com/file/d/13CuUJnpGw8D6AV_4NIO9gMf03BTOkGiW/view?usp=drive_link";
+export const RESUME_URL = "https://drive.google.com/file/d/1tU414kffhPr6urgORPueUGdP8QQrmOQR/view?usp=sharing";
 
 
