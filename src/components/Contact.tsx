@@ -203,12 +203,15 @@ export default function Contact({ darkMode }: ContactProps) {
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full flex items-center justify-center gap-2 px-8 py-3 rounded-sm font-mono text-sm uppercase tracking-wide text-cyan-400 border border-cyan-400 ${
-                isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-cyan-400 hover:text-black'
-              } transition-colors relative overflow-hidden`}
+              className={`w-full flex items-center justify-center gap-3 px-8 py-4 rounded-lg font-mono text-sm uppercase tracking-wide text-cyan-400 border-2 border-cyan-400 ${
+                isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-cyan-400 hover:text-black hover:shadow-lg hover:shadow-cyan-400/25'
+              } transition-all duration-300 relative overflow-hidden group backdrop-blur-sm`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
+              {!isSubmitting && (
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+              )}
               {isSubmitting ? (
                 <span className="digital-signal">Transmitting...</span>
               ) : (

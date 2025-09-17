@@ -3,6 +3,9 @@ export const SOCIAL_URLS = {
   GITHUB: "https://github.com/Aman-vijay",
   LINKEDIN: "https://linkedin.com/in/amanvijay04",
   EMAIL: "mailto:shivamvj04@gmail.com",
+  HASHNODE: "https://hashnode.com/@amanvijay",
+  TWITTER: "https://twitter.com/amanvijay04",
+  LEETCODE: "https://leetcode.com/amanvijay04",
 };
 
 // Contact information

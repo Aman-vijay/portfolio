@@ -189,14 +189,16 @@ const AboutMeSection: React.FC<AboutMeSectionProps> = ({ darkMode }) => {
             href={RESUME_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 px-6 py-3 rounded-sm font-mono text-sm uppercase tracking-wide transition-colors border border-cyan-400 ${
+            className={`inline-flex items-center gap-3 px-8 py-4 rounded-lg font-mono text-sm uppercase tracking-wide transition-all duration-300 border-2 border-cyan-400 relative overflow-hidden group ${
               darkMode
-                ? 'bg-black text-cyan-400 hover:bg-cyan-400 hover:text-black'
-                : 'bg-indigo-900 text-cyan-300 hover:bg-cyan-300 hover:text-black'
-            }`}
-            whileHover={{ scale: 1.05 }}
+                ? 'bg-black/50 text-cyan-400 hover:bg-cyan-400 hover:text-black hover:shadow-lg hover:shadow-cyan-400/25'
+                : 'bg-indigo-900/50 text-cyan-300 hover:bg-cyan-300 hover:text-black hover:shadow-lg hover:shadow-cyan-300/25'
+            } backdrop-blur-sm`}
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
+            {/* Animated background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             <DownloadIcon size={20} />
             <span>Download Resume</span>
           </motion.a>

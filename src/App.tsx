@@ -11,6 +11,7 @@ const SkillsSection = lazy(() => import('./components/SkillsSection'));
 const ProjectsSection = lazy(() => import('./components/ProjectsSection'));
 const Contact = lazy(() => import('./components/Contact'));
 const Timeline = lazy(() => import('./components/Timeline'));
+const LeetCodeGraph = lazy(() => import('./components/LeetCodeGraph'));
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
       <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
         <AboutMeSection darkMode={darkMode} />
         <SkillsSection darkMode={darkMode} />
+        <LeetCodeGraph darkMode={darkMode} />
         <ProjectsSection darkMode={darkMode} />
         <Timeline darkMode={darkMode} />
         <Contact darkMode={darkMode} />

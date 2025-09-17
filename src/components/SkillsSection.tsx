@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Database, Globe, Server } from 'lucide-react';
+import { Code2, Database, Globe, Server, Cloud, Wrench } from 'lucide-react';
 import {
   SiReact, SiTypescript, SiTailwindcss, SiNextdotjs,
   SiNodedotjs, SiPython, SiPostgresql, SiMongodb,
-  SiDocker, SiAmazon, SiGit, SiGithubactions
+  SiDocker, SiAmazon, SiGit, SiGithubactions, SiJavascript,
+  SiExpress, SiRedis, SiKubernetes, SiLinux, SiNginx
 } from 'react-icons/si';
 
 interface SkillsSectionProps {
@@ -15,31 +16,55 @@ const skillsData = [
   { 
     icon: Code2, 
     title: "Frontend Development", 
+    color: "from-blue-500 to-cyan-500",
     skills: [
-      { name: "React", icon: SiReact, proficiency: 90 },
-      { name: "TypeScript", icon: SiTypescript, proficiency: 85 },
-      { name: "Tailwind CSS", icon: SiTailwindcss, proficiency: 88 },
-      { name: "Next.js", icon: SiNextdotjs, proficiency: 82 }
-    ]
-  },
-  { 
-    icon: Database, 
-    title: "Backend Development", 
-    skills: [
-      { name: "Node.js", icon: SiNodedotjs, proficiency: 78 },
-      { name: "Python", icon: SiPython, proficiency: 75 },
-      { name: "PostgreSQL", icon: SiPostgresql, proficiency: 72 },
-      { name: "MongoDB", icon: SiMongodb, proficiency: 70 }
+      { name: "React", icon: SiReact, proficiency: 90, color: "#61DAFB" },
+      { name: "TypeScript", icon: SiTypescript, proficiency: 85, color: "#3178C6" },
+      { name: "JavaScript", icon: SiJavascript, proficiency: 92, color: "#F7DF1E" },
+      { name: "Tailwind CSS", icon: SiTailwindcss, proficiency: 88, color: "#06B6D4" },
+      { name: "Next.js", icon: SiNextdotjs, proficiency: 82, color: "#000000" }
     ]
   },
   { 
     icon: Server, 
-    title: "DevOps & Tools", 
+    title: "Backend Development", 
+    color: "from-green-500 to-emerald-500",
     skills: [
-      { name: "Docker", icon: SiDocker, proficiency: 65 },
-      { name: "AWS", icon: SiAmazon, proficiency: 68 },
-      { name: "Git", icon: SiGit, proficiency: 85 },
-      { name: "CI/CD", icon: SiGithubactions, proficiency: 62 }
+      { name: "Node.js", icon: SiNodedotjs, proficiency: 85, color: "#339933" },
+      { name: "Express.js", icon: SiExpress, proficiency: 82, color: "#000000" },
+      { name: "Python", icon: SiPython, proficiency: 75, color: "#3776AB" },
+      { name: "Redis", icon: SiRedis, proficiency: 70, color: "#DC382D" }
+    ]
+  },
+  { 
+    icon: Database, 
+    title: "Database & Storage", 
+    color: "from-purple-500 to-pink-500",
+    skills: [
+      { name: "PostgreSQL", icon: SiPostgresql, proficiency: 78, color: "#336791" },
+      { name: "MongoDB", icon: SiMongodb, proficiency: 75, color: "#47A248" },
+      { name: "Redis", icon: SiRedis, proficiency: 70, color: "#DC382D" }
+    ]
+  },
+  { 
+    icon: Cloud, 
+    title: "Cloud & Infrastructure", 
+    color: "from-orange-500 to-red-500",
+    skills: [
+      { name: "AWS", icon: SiAmazon, proficiency: 72, color: "#FF9900" },
+      { name: "Docker", icon: SiDocker, proficiency: 75, color: "#2496ED" },
+      { name: "Kubernetes", icon: SiKubernetes, proficiency: 60, color: "#326CE5" },
+      { name: "NGINX", icon: SiNginx, proficiency: 68, color: "#009639" }
+    ]
+  },
+  { 
+    icon: Wrench, 
+    title: "DevOps & Tools", 
+    color: "from-yellow-500 to-orange-500",
+    skills: [
+      { name: "Git", icon: SiGit, proficiency: 88, color: "#F05032" },
+      { name: "CI/CD", icon: SiGithubactions, proficiency: 70, color: "#2088FF" },
+      { name: "Linux", icon: SiLinux, proficiency: 75, color: "#FCC624" }
     ]
   },
 ];
@@ -62,25 +87,46 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
 
   // Simplified CircuitBar component
   const CircuitBar = ({ 
-    proficiency, 
-    isHovered 
+    proficiency,
+    isHovered,
+    color
   }: { 
     proficiency: number;
     isHovered: boolean;
+    color: string;
   }) => {
     return (
-      <div className="mt-2 relative">
-        <div className={`h-2 ${darkMode ? 'bg-gray-800' : 'bg-gray-700'} border border-cyan-400/50 overflow-hidden`}>
+      <div className="mt-3 relative">
+        <div className={`h-3 rounded-full ${darkMode ? 'bg-gray-800/50' : 'bg-gray-700/50'} border border-gray-600/30 overflow-hidden backdrop-blur-sm`}>
           <motion.div
-            className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 relative z-10"
+            className="h-full relative z-10 rounded-full"
+            style={{
+              background: `linear-gradient(90deg, ${color}40, ${color})`
+            }}
             initial={{ width: 0 }}
             whileInView={{ width: `${proficiency}%` }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: 'easeOut' }}
+            transition={{ duration: 1.5, ease: 'easeOut', delay: 0.2 }}
           />
+          {isHovered && (
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: `linear-gradient(90deg, transparent, ${color}60, transparent)`,
+                animation: 'shimmer 2s infinite'
+              }}
+              initial={{ x: '-100%' }}
+              animate={{ x: '100%' }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          )}
         </div>
         
-        <div className={`text-xs font-mono mt-1 text-right ${darkMode ? 'text-cyan-400' : 'text-cyan-500'}`}>
+        <div className={`text-xs font-mono mt-2 text-right transition-colors ${
+          isHovered 
+            ? 'text-cyan-300' 
+            : darkMode ? 'text-gray-400' : 'text-gray-500'
+        }`}>
           {proficiency}%
         </div>
       </div>
@@ -122,50 +168,70 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
           {skillsData.map((category, index) => (
             <motion.div
               key={index}
-              className={`p-6 rounded-lg ${
+              className={`p-6 rounded-xl relative overflow-hidden ${
                 darkMode 
-                  ? 'border border-cyan-400/30 bg-black/50 hover:bg-black/70 shadow-lg' 
-                  : 'border border-cyan-400/30 bg-white/70 hover:bg-white/90 shadow-lg'
-              } transition-all relative overflow-hidden backdrop-blur-sm`}
+                  ? 'border border-cyan-400/20 bg-black/40 hover:bg-black/60 shadow-xl hover:shadow-cyan-400/10' 
+                  : 'border border-cyan-400/20 bg-white/60 hover:bg-white/80 shadow-xl hover:shadow-cyan-400/10'
+              } transition-all duration-500 backdrop-blur-sm group`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.4 }}
-              whileHover={{ scale: 1.01 }}
+              whileHover={{ scale: 1.02, y: -5 }}
             >
+              {/* Gradient Background */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
+              
               {/* Category Icon */}
-              <div className={`w-12 h-12 ${darkMode ? 'text-cyan-400' : 'text-cyan-600'} mb-6`}>
-                <category.icon size={48} strokeWidth={1.5} />
+              <div className={`w-16 h-16 rounded-xl flex items-center justify-center mb-6 ${
+                darkMode ? 'bg-cyan-400/10 text-cyan-400' : 'bg-cyan-600/10 text-cyan-600'
+              } group-hover:scale-110 transition-transform duration-300`}>
+                <category.icon size={32} strokeWidth={1.5} />
               </div>
 
               {/* Category Title */}
-              <h3 className={`text-xl font-semibold font-mono mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+              <h3 className={`text-xl font-bold font-mono mb-6 ${darkMode ? 'text-white' : 'text-gray-800'} group-hover:text-cyan-400 transition-colors duration-300`}>
                 {category.title}
               </h3>
 
               {/* Skills */}
-              <div className="space-y-4 mt-6">
+              <div className="space-y-5">
                 {category.skills.map((skill, i) => {
                   const isHovered = hoveredSkill === skill.name;
                   return (
                     <div 
                       key={i} 
-                      className="skill-item"
+                      className="skill-item p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
                       onMouseEnter={() => setHoveredSkill(skill.name)}
                       onMouseLeave={() => setHoveredSkill(null)}
                     >
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-3">
                         {/* Skill Icon */}
-                        <div className={`text-lg ${darkMode ? 'text-cyan-300' : 'text-cyan-600'}`}>
-                          <skill.icon />
+                        <div 
+                          className={`text-2xl transition-all duration-300 ${
+                            isHovered ? 'scale-125' : 'scale-100'
+                          }`}
+                          style={{ color: isHovered ? skill.color : (darkMode ? '#67e8f9' : '#0891b2') }}
+                        >
+                          <skill.icon size={24} />
                         </div>
                         
                         {/* Skill Name */}
-                        <GlitchText text={skill.name} />
+                        <div className={`font-mono font-medium transition-colors duration-300 ${
+                          isHovered 
+                            ? 'text-cyan-300' 
+                            : darkMode ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          {skill.name}
+                        </div>
                       </div>
                       
                       {/* Proficiency Bar */}
-                      <CircuitBar proficiency={skill.proficiency} isHovered={isHovered} />
+                      <CircuitBar 
+                        proficiency={skill.proficiency} 
+                        isHovered={isHovered}
+                        color={skill.color}
+                      />
                     </div>
                   );
                 })}
@@ -178,6 +244,10 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
       {/* Simplified styles */}
       <style>
         {`
+          @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
           .terminal-cursor::after {
             content: '_';
             animation: blink 1s step-end infinite;

@@ -153,8 +153,9 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
                     onClick={() => openModal(project)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 px-4 py-2 rounded-sm font-mono text-sm uppercase tracking-wide text-cyan-400 border border-cyan-400 hover:bg-cyan-400 hover:text-black transition-colors"
+                    className="flex items-center gap-2 px-6 py-3 rounded-lg font-mono text-sm uppercase tracking-wide text-cyan-400 border-2 border-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-300 hover:shadow-lg hover:shadow-cyan-400/25 backdrop-blur-sm relative overflow-hidden group"
                   >
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
                     View Details
                     <ArrowRight size={16} />
                   </motion.button>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
+import { Github, Linkedin, Mail, ChevronDown, Hash, Twitter } from 'lucide-react';
+import { SiLeetcode } from 'react-icons/si';
 import { SOCIAL_URLS } from '../utils/urls';
 import { useEffect,useState } from 'react';
 
@@ -132,7 +133,7 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
 
           {/* Social Links */}
           <motion.div
-            className="flex items-center justify-center space-x-6 mb-12"
+            className="flex items-center justify-center space-x-4 mb-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
@@ -140,23 +141,30 @@ const HeroSection: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
             {[
               { href: SOCIAL_URLS.GITHUB, Icon: Github, label: 'GitHub' },
               { href: SOCIAL_URLS.LINKEDIN, Icon: Linkedin, label: 'LinkedIn' },
+              { href: SOCIAL_URLS.HASHNODE, Icon: Hash, label: 'Hashnode' },
+              { href: SOCIAL_URLS.TWITTER, Icon: Twitter, label: 'Twitter' },
+              { href: SOCIAL_URLS.LEETCODE, Icon: SiLeetcode, label: 'LeetCode', isReactIcon: true },
               { href: SOCIAL_URLS.EMAIL, Icon: Mail, label: 'Email' },
-            ].map(({ href, Icon, label }) => (
+            ].map(({ href, Icon, label, isReactIcon }) => (
               <motion.a
                 key={href}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-3 rounded-full transition-colors group relative ${
+                className={`p-3 rounded-full transition-all duration-300 group relative backdrop-blur-sm ${
                   darkMode
-                    ? 'bg-gray-800/50 hover:bg-gray-700/50'
-                    : 'bg-indigo-900/30 hover:bg-indigo-800/30'
-                }`}
-                whileHover={{ scale: 1.1 }}
+                    ? 'bg-gray-800/50 hover:bg-cyan-400/20 border border-cyan-400/30 hover:border-cyan-400/60'
+                    : 'bg-indigo-900/30 hover:bg-cyan-400/20 border border-cyan-400/30 hover:border-cyan-400/60'
+                } hover:shadow-lg hover:shadow-cyan-400/20`}
+                whileHover={{ scale: 1.15, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Icon size={24} className={`${darkMode ? 'text-cyan-400' : 'text-cyan-300'}`} />
-                <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                {isReactIcon ? (
+                  <Icon size={24} className={`${darkMode ? 'text-cyan-400' : 'text-cyan-300'} transition-colors group-hover:text-cyan-300`} />
+                ) : (
+                  <Icon size={24} className={`${darkMode ? 'text-cyan-400' : 'text-cyan-300'} transition-colors group-hover:text-cyan-300`} />
+                )}
+                <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap border border-cyan-400/30">
                   {label}
                 </span>
               </motion.a>
